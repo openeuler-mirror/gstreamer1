@@ -1,6 +1,6 @@
 Name:           gstreamer1
 Version:        1.14.4
-Release:        3
+Release:        4
 Summary:        Bindings for GStreamer 1.0, the open source multimedia framework
 
 License:        LGPLv2+
@@ -14,9 +14,6 @@ BuildRequires:  automake bison check-devel chrpath docbook-style-dsssl docbook-s
 BuildRequires:  docbook-utils flex gettext gettext-devel ghostscript glib2-devel >= 2.32.0 transfig
 BuildRequires:  gobject-introspection-devel >= 1.31.1 gtk-doc >= 1.3 libtool libxslt m4 texlive-jadetex
 BuildRequires:  libxml2-devel >= 2.4.0 netpbm-progs openjade pkgconfig python2 texlive-dvips
-
-# Patch0 for GStreamer RPM provides is from fedora 29
-Patch0:         gstreamer-inspect-rpm-format.patch
 
 %description
 GStreamer1 implements a framework that allows for processing and encoding of
@@ -98,6 +95,9 @@ install -m0755 -D %{SOURCE2} %{buildroot}%{_rpmconfigdir}/gstreamer1.prov
 %{_mandir}/man1/*.gz
 
 %changelog
+* Tue Jan 7 2020 openEuler Buildteam <buildteam@openeuler.org> - 1.14.4-4
+- update software package
+
 * Sun Dec 29 2019 openEuler Buildteam <buildteam@openeuler.org> - 1.14.4-3
 - Type:bugfix
 - ID:NA
