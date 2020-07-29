@@ -1,11 +1,11 @@
 Name:           gstreamer1
-Version:        1.14.4
-Release:        4
+Version:        1.16.2
+Release:        1
 Summary:        Bindings for GStreamer 1.0, the open source multimedia framework
 
 License:        LGPLv2+
 URL:            https://gstreamer.freedesktop.org/
-Source0:        https://gstreamer.freedesktop.org/data/pkg/gstreamer-%{version}.tar.xz
+Source0:        http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar.xz
 # Source1 and Source2 are from fedora 29
 Source1:        gstreamer1.attr
 Source2:        gstreamer1.prov
@@ -13,7 +13,7 @@ Source2:        gstreamer1.prov
 BuildRequires:  automake bison check-devel chrpath docbook-style-dsssl docbook-style-xsl
 BuildRequires:  docbook-utils flex gettext gettext-devel ghostscript glib2-devel >= 2.32.0 transfig
 BuildRequires:  gobject-introspection-devel >= 1.31.1 gtk-doc >= 1.3 libtool libxslt m4 texlive-jadetex
-BuildRequires:  libxml2-devel >= 2.4.0 netpbm-progs openjade pkgconfig python2 texlive-dvips
+BuildRequires:  libxml2-devel >= 2.4.0 netpbm-progs openjade pkgconfig python3 texlive-dvips
 
 %description
 GStreamer1 implements a framework that allows for processing and encoding of
@@ -39,7 +39,6 @@ Summary:        Documents for %{name}
 Buildarch:      noarch
 Requires:       man info %{name} = %{version}-%{release}
 Provides:       %{name}-devel-docs
-Obsoletes:      %{name}-devel-docs
 
 %description    help
 Man pages and other related documents for %{name}.
@@ -87,6 +86,9 @@ install -m0755 -D %{SOURCE2} %{buildroot}%{_rpmconfigdir}/gstreamer1.prov
 %{_includedir}/gstreamer-1.0/gst/check/*.h
 %{_includedir}/gstreamer-1.0/gst/base/*.h
 
+%{_datadir}/gstreamer-1.0/gdb/*
+%{_datadir}/gdb/auto-load/*
+
 %files help
 %doc RELEASE README 
 %{_datadir}/gtk-doc/html/gstreamer-1.0/*
@@ -95,6 +97,9 @@ install -m0755 -D %{SOURCE2} %{buildroot}%{_rpmconfigdir}/gstreamer1.prov
 %{_mandir}/man1/*.gz
 
 %changelog
+* Sat Jul 25 2020 hanhui <hanhui15@huawei.com> - 1.16.2-1
+- update 1.16.2
+
 * Tue Jan 7 2020 openEuler Buildteam <buildteam@openeuler.org> - 1.14.4-4
 - update software package
 
