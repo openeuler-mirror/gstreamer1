@@ -1,6 +1,6 @@
 Name:           gstreamer1
 Version:        1.16.2
-Release:        1
+Release:        2
 Summary:        Bindings for GStreamer 1.0, the open source multimedia framework
 
 License:        LGPLv2+
@@ -9,6 +9,8 @@ Source0:        http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{versi
 # Source1 and Source2 are from fedora 29
 Source1:        gstreamer1.attr
 Source2:        gstreamer1.prov
+
+Patch0001:      Adapt-to-backwards-incompatible-change-in-GUN.patch
 
 BuildRequires:  automake bison check-devel chrpath docbook-style-dsssl docbook-style-xsl
 BuildRequires:  docbook-utils flex gettext gettext-devel ghostscript glib2-devel >= 2.32.0 transfig
@@ -97,6 +99,9 @@ install -m0755 -D %{SOURCE2} %{buildroot}%{_rpmconfigdir}/gstreamer1.prov
 %{_mandir}/man1/*.gz
 
 %changelog
+* Tue Aug 4 2020 wangye <wangye70@huawei.com> - 1.16.2-2
+- fix 1.16.2 make error
+
 * Sat Jul 25 2020 hanhui <hanhui15@huawei.com> - 1.16.2-1
 - update 1.16.2
 
