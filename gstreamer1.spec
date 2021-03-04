@@ -1,6 +1,6 @@
 Name:           gstreamer1
 Version:        1.16.2
-Release:        2
+Release:        3
 Summary:        Bindings for GStreamer 1.0, the open source multimedia framework
 
 License:        LGPLv2+
@@ -12,10 +12,10 @@ Source2:        gstreamer1.prov
 
 Patch0001:      Adapt-to-backwards-incompatible-change-in-GUN.patch
 
-BuildRequires:  automake bison check-devel chrpath docbook-style-dsssl docbook-style-xsl
-BuildRequires:  docbook-utils flex gettext gettext-devel ghostscript glib2-devel >= 2.32.0 transfig
-BuildRequires:  gobject-introspection-devel >= 1.31.1 gtk-doc >= 1.3 libtool libxslt m4 texlive-jadetex
-BuildRequires:  libxml2-devel >= 2.4.0 netpbm-progs openjade pkgconfig python3 texlive-dvips
+BuildRequires:  automake bison check-devel chrpath m4
+BuildRequires:  flex gettext gettext-devel glib2-devel >= 2.32.0
+BuildRequires:  gobject-introspection-devel >= 1.31.1 libtool
+BuildRequires:  libxml2-devel >= 2.4.0 pkgconfig
 
 %description
 GStreamer1 implements a framework that allows for processing and encoding of
@@ -50,7 +50,7 @@ Man pages and other related documents for %{name}.
 
 %build
 NOCONFIGURE=1 ./autogen.sh
-%configure --enable-gtk-doc --enable-debug --disable-fatal-warnings --disable-silent-rules \
+%configure --enable-debug --disable-fatal-warnings --disable-silent-rules \
            --disable-tests --disable-examples
 make %{?_smp_mflags}
 
@@ -99,6 +99,9 @@ install -m0755 -D %{SOURCE2} %{buildroot}%{_rpmconfigdir}/gstreamer1.prov
 %{_mandir}/man1/*.gz
 
 %changelog
+* Wed Mar 3 2021 yanan <yanan@huawei.com> - 1.16.2-3
+- remove buildrequires for gtk-doc
+
 * Tue Aug 4 2020 wangye <wangye70@huawei.com> - 1.16.2-2
 - fix 1.16.2 make error
 
