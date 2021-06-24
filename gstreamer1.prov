@@ -1,5 +1,8 @@
 #!/bin/sh
 #
+# Script to install in:
+# /usr/lib/rpm/redhat/find-provides.d
+#
 # Transform GStreamer auto install info into RPM provides
 #
 # Author: Bastien Nocera <hadess@hadess.net>

@@ -1,21 +1,21 @@
 Name:           gstreamer1
-Version:        1.16.2
-Release:        3
+Version:        1.18.4
+Release:        1
 Summary:        Bindings for GStreamer 1.0, the open source multimedia framework
 
 License:        LGPLv2+
 URL:            https://gstreamer.freedesktop.org/
 Source0:        http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar.xz
-# Source1 and Source2 are from fedora 29
 Source1:        gstreamer1.attr
 Source2:        gstreamer1.prov
 
-Patch0001:      Adapt-to-backwards-incompatible-change-in-GUN.patch
+Patch0001:      gstreamer-inspect-rpm-format.patch
 
-BuildRequires:  automake bison check-devel chrpath m4
+BuildRequires:  bison check-devel chrpath meson >= 0.48.0 gcc
 BuildRequires:  flex gettext gettext-devel glib2-devel >= 2.32.0
 BuildRequires:  gobject-introspection-devel >= 1.31.1 libtool
-BuildRequires:  libxml2-devel >= 2.4.0 pkgconfig
+BuildRequires:  libxml2-devel >= 2.4.0 pkgconfig libcap-devel
+BuildRequires:  libunwind-devel elfutils-devel bash-completion
 
 %description
 GStreamer1 implements a framework that allows for processing and encoding of
@@ -49,14 +49,14 @@ Man pages and other related documents for %{name}.
 %autosetup -n gstreamer-%{version} -p1
 
 %build
-NOCONFIGURE=1 ./autogen.sh
-%configure --enable-debug --disable-fatal-warnings --disable-silent-rules \
-           --disable-tests --disable-examples
-make %{?_smp_mflags}
-
+%meson  \
+  -D gtk_doc=disabled -D tests=disabled -D examples=disabled \
+  -D ptp-helper-permissions=capabilities -D dbghelp=disabled \
+  -D doc=disabled
+%meson_build
 
 %install
-make install DESTDIR=%{buildroot}
+%meson_install
 %find_lang gstreamer-1.0
 %delete_la
 install -m0644 -D %{SOURCE1} %{buildroot}%{_rpmconfigdir}/fileattrs/gstreamer1.attr
@@ -92,13 +92,17 @@ install -m0755 -D %{SOURCE2} %{buildroot}%{_rpmconfigdir}/gstreamer1.prov
 %{_datadir}/gdb/auto-load/*
 
 %files help
-%doc RELEASE README 
-%{_datadir}/gtk-doc/html/gstreamer-1.0/*
-%{_datadir}/gtk-doc/html/gstreamer-libs-1.0/*
-%{_datadir}/gtk-doc/html/gstreamer-plugins-1.0/*
+%doc RELEASE README
 %{_mandir}/man1/*.gz
 
 %changelog
+* Wed Jun 23 2021 weijin deng <weijin.deng@turbolinux.com.cn> - 1.18.4-1
+- Upgrade to 1.18.4
+- Delete Adapt-to-backwards-incompatible-change-in-GUN.patch whose target
+  patch file doesn't exist in this version 1.18.4
+- Add gstreamer-inspect-rpm-format.patch
+- Use meson rebuild
+
 * Wed Mar 3 2021 yanan <yanan@huawei.com> - 1.16.2-3
 - remove buildrequires for gtk-doc
 
