@@ -1,5 +1,5 @@
 Name:           gstreamer1
-Version:        1.18.4
+Version:        1.19.3
 Release:        1
 Summary:        Bindings for GStreamer 1.0, the open source multimedia framework
 
@@ -11,7 +11,7 @@ Source2:        gstreamer1.prov
 
 Patch0001:      gstreamer-inspect-rpm-format.patch
 
-BuildRequires:  bison check-devel chrpath meson >= 0.48.0 gcc
+BuildRequires:  bison check-devel chrpath meson >= 0.59.0 gcc
 BuildRequires:  flex gettext gettext-devel glib2-devel >= 2.32.0
 BuildRequires:  gobject-introspection-devel >= 1.31.1 libtool
 BuildRequires:  libxml2-devel >= 2.4.0 pkgconfig libcap-devel
@@ -96,6 +96,9 @@ install -m0755 -D %{SOURCE2} %{buildroot}%{_rpmconfigdir}/gstreamer1.prov
 %{_mandir}/man1/*.gz
 
 %changelog
+* Fri Dec 3 2021 hanhui <hanhui15@huawei.com> - 1.19.3-1
+- Upgrade to gstreamer-1.19.3
+
 * Wed Jun 23 2021 weijin deng <weijin.deng@turbolinux.com.cn> - 1.18.4-1
 - Upgrade to 1.18.4
 - Delete Adapt-to-backwards-incompatible-change-in-GUN.patch whose target
